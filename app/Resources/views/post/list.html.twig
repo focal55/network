@@ -1,1 +1,12 @@
-<h1>List Posts</h1>
+<h1>Posts</h1>
+<div class="row">
+  <div class="col-xs-12">
+    {% for post in posts %}
+    <div class="item">
+      <h2><a href="{{ path('post_detail', {'post_id' : post.id}) }}">{{ post.title }}</a></h2>
+      <div class="body">{{ post.body }}</div>
+      <div class="date">{{ post.created|date('n/j/Y') }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

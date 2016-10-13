@@ -36,20 +36,31 @@ class PostController extends Controller  {
   }
 
   /**
-   * @Route("/posts/{post_id}")
+   * @Route("/posts")
+   */
+  public function listAction() {
+    $em = $this->getDoctrine()->getManager();
+    $posts = $em->getRepository('AppBundle:Post')->findAll();
+
+    return $this->render('post/list.html.twig',
+      ['posts' => $posts]
+    );
+  }
+
+  /**
+   * @Route("/posts/{post_id}", name="post_detail")
    */
   public function showAction($post_id = NULL) {
+    $em = $this->getDoctrine()->getManager();
+    $post = $em->getRepository('AppBundle:Post')->findOneBy(['id' => $post_id ]);
 
-    if ($post_id) {
-      return $this->render('post/detail.html.twig', [
-        'post_id' => $post_id
-      ]);
+    if (!$post) {
+      throw $this->createNotFoundException('No Post Found');
     }
-    else {
-      return $this->render('post/list.html.twig', [
-        'post_id' => $post_id
-      ]);
-    }
+
+    return $this->render('post/detail.html.twig', [
+      'post' => $post
+    ]);
 
   }
 
