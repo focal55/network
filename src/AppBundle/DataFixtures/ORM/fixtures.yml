@@ -1,0 +1,7 @@
+AppBundle\Entity\Post:
+  post_{1..10}:
+    uid: 1
+    title: <words($nb = 3, $asText = true)>
+    body: <paragraph($nbSentences = 3, $variableNbSentences = true)>
+    created: <unixTime($max = 'now')>
+    updated: '@self->created'

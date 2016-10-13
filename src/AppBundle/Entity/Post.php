@@ -33,7 +33,7 @@ class Post {
   private $title;
 
   /**
-   * @ORM\Column(type="string", )
+   * @ORM\Column(type="blob", )
    */
   private $body;
 
