@@ -8,47 +8,26 @@
 
 namespace AppBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
  */
-class User {
-  /**
-   * @ORM\Id
-   * @ORM\GeneratedValue(strategy="AUTO")
-   * @ORM\Column(type="integer")
-   */
-  private $id;
+class User extends BaseUser
+{
 
-  /**
-   * @ORM\Column(type="string")
-   */
-  private $name;
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
 
-  /**
-   * @ORM\Column(type="string")
-   */
-  private $password;
-
-  /**
-   * @ORM\Column(type="string")
-   */
-  private $email;
-
-  /**
-   * @ORM\Column(type="integer")
-   */
-  private $access;
-
-  /**
-   * @ORM\Column(type="integer")
-   */
-  private $created;
-
-  /**
-   * @ORM\Column(type="integer")
-   */
-  private $last_login;
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
 }

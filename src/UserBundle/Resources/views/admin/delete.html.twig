@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1>Delete User</h1>
+
+                <div class="card card-block">
+                    {{ form_start(userForm) }}
+
+                    <p>Are you sure you would like to delete this user?</p>
+
+                    <h3>{{ user.email }}</h3>
+
+                    <button type="submit" class="btn btn-danger pull-right" formnovalidate>Delete</button>
+                    {{ form_end(userForm) }}
+                </div>
+                <div class="text-center">
+                    <a href="{{ path('admin_user_list') }}">&laquo; Back to User List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

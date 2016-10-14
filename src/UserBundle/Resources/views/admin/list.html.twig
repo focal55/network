@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+
+                <div class="action-buttons">
+                    <a href="{{ path('admin_user_new') }}" class="btn btn-sm btn-default-outline waves-effect"><i class="fa fa-plus" aria-hidden="true"></i> New User</a>
+                </div>
+
+                <h1>Users</h1>
+
+                <table class="table table-striped">
+                    <tr>
+                        <th>ID</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Email', 'u.email') }}</th>
+                        <th>Roles</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Created', 'u.created') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Updated', 'u.updated') }}</th>
+                        <th class="ops">&nbsp;</th>
+                    </tr>
+                    {% for user in pagination %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <ul>
+                                {% for role in user.roles %}
+                                    {% if role != 'ROLE_USER' %}
+                                    <li><small>{{ role }}</small></li>
+                                    {% endif %}
+                                {% endfor %}
+                                </ul>
+                            </td>
+                            <td>{{ user.created|date('m/d/Y h:ia') }}</td>
+                            <td>{{ user.updated|date('m/d/Y h:ia') }}</td>
+                            <td>
+                                <a href="{{ path('admin_user_edit', {'id': user.id}) }}"><i class="fa fa-edit" aria-hidden="true"></i> edit</a> &nbsp;
+                                <a href="{{ path('admin_user_delete', {'id': user.id}) }}"><i class="fa fa-remove" aria-hidden="true"></i> delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <div class="navigation text-center">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

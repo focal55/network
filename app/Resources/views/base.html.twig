@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Bruno's List!{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/mdbp/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/mdbp/css/mdb.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+
+<nav class="navbar navbar-dark default-color site-header">
+    <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
+        <i class="fa fa-bars"></i>
+    </button>
+    <a href="{{ path('homepage') }}"><img class="logo-icon" src="{{ asset('images/brunoslist_logo_ret_white.png') }}"></a>
+    <div class="container pull-right">
+        <div class="collapse navbar-toggleable-xs" id="collapseEx2">
+            <ul class="nav navbar-nav">
+                {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i> Places
+                    </a>
+                </li>
+                <li class="nav-item btn-group{% if app.request.attributes.get('_route') starts with 'place_admin' %} active{% endif %}">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-map-o" aria-hidden="true"></i> Place Finder
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <a class="dropdown-item" href="#">Finder Jobs</a>
+                        <a class="dropdown-item" href="#">Finder Templates</a>
+                        <a class="dropdown-item" href="{{ path('place_admin_search_term_list') }}">Search Terms</a>
+                        <a class="dropdown-item" href="{{ path('place_admin_locality_list') }}">Search Locations</a>
+                    </div>
+                </li>
+                <li class="nav-item{% if app.request.attributes.get('_route') starts with 'admin_user' %} active{% endif %}">
+                    <a class="nav-link" href="{{ path('admin_user_list') }}">
+                        <i class="fa fa-group" aria-hidden="true"></i> Users
+                    </a>
+                </li>
+                {% endif %}
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-user" aria-hidden="true"></i> Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('security_logout') }}">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('security_login') }}">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i> Login
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div><br />
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <div class="logged-in-as container pull-right">
+            Logged in as <em>{{ app.user.username }}</em>
+        </div>
+    {% endif %}
+
+</nav>
+
+{% for type, flashMessages in app.session.flashbag.all() %}
+    {% for flashMessage in flashMessages %}
+        <div class="container">
+            <div class="col-md-12">
+                <div class="alert alert-{{ type }}">
+                    {{ flashMessage|trans }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<div class="container main-content">
+    {% block body %}{% endblock %}
+</div>
+
+<footer class="page-footer stylish-color-dark center-on-small-only">
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-6">
+                <h5 class="title">Bruno's List</h5>
+                <p>Find pet care facilities near you!</p>
+            </div>
+
+            <div class="col-md-6">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Facilities</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-copyright">
+        <div class="container-fluid">
+            Copyright &copy 2016 <a href="https://www.thinkbean.com">Thinkbean, LLC</a>
+        </div>
+    </div>
+</footer>
+
+{% block javascripts %}
+    <script src="{{ asset('vendor/mdbp/js/jquery-2.2.3.min.js') }}"></script>
+    <script src="{{ asset('vendor/mdbp/js/tether.min.js') }}"></script>
+    <script src="{{ asset('vendor/mdbp/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('vendor/mdbp/js/mdb.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.mdb-select').material_select();
+        });
+    </script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,18 @@
+<div class="card card-block">
+    {{ form_start(userForm) }}
+    <div class="md-form">
+        {{ form_row(userForm.email) }}
+    </div>
+
+
+        {{ form_row(userForm.roles, { 'attr': {'class': 'mdb-select'} }) }}
+
+
+    <button type="submit" class="btn btn-default pull-right" formnovalidate>Save</button>
+
+
+    {{ form_end(userForm) }}
+</div>
+<div class="text-center">
+    <a href="{{ path('admin_user_list') }}">&laquo; Back to User List</a>
+</div>
