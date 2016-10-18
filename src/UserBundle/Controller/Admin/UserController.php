@@ -48,6 +48,11 @@ class UserController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
+            // Set default value.
+            $date = new \DateTime();
+            $user->setCreated($date);
+            $user->setUpdated($date);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -94,8 +99,10 @@ class UserController extends Controller
     /**
      * @Route("/users/{id}/delete", name="admin_user_delete")
      */
-    public function deleteAction(Request $request, User $user)
+    public function deleteAction($user_id = NULL)
     {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('User')->findOneBy(['id' => $user_id ]);
         return 'admin_user_delete';
     }
 }

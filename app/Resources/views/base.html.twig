@@ -34,8 +34,8 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <a class="dropdown-item" href="#">Finder Jobs</a>
                         <a class="dropdown-item" href="#">Finder Templates</a>
-                        <a class="dropdown-item" href="{{ path('place_admin_search_term_list') }}">Search Terms</a>
-                        <a class="dropdown-item" href="{{ path('place_admin_locality_list') }}">Search Locations</a>
+                        {#<a class="dropdown-item" href="{{ path('place_admin_search_term_list') }}">Search Terms</a>#}
+                        {#<a class="dropdown-item" href="{{ path('place_admin_locality_list') }}">Search Locations</a>#}
                     </div>
                 </li>
                 <li class="nav-item{% if app.request.attributes.get('_route') starts with 'admin_user' %} active{% endif %}">
