@@ -2,6 +2,7 @@
 
 namespace UserBundle\Controller;
 
+use Faker\Provider\cs_CZ\DateTime;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use UserBundle\Entity\User;
@@ -25,6 +26,11 @@ class UserController extends Controller
         if ($form->isValid()) {
             /** @var User $user */
             $user = $form->getData();
+
+            // Set default value.
+            $date = new \DateTime();
+            $user->setCreated($date);
+            $user->setUpdated($date);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
