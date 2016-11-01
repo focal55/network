@@ -99,10 +99,19 @@ class UserController extends Controller
     /**
      * @Route("/users/{id}/delete", name="admin_user_delete")
      */
-    public function deleteAction($user_id = NULL)
+    public function deleteAction(Request $request, User $user)
     {
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('User')->findOneBy(['id' => $user_id ]);
+        $form = $this->createForm(DeleteUserType::class, $user);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+          $user = $form->getData();
+
+          $em = $this->getDoctrine()->getManager();
+          $em->remove($user);
+          $em->flush();
+        }
+
         return 'admin_user_delete';
     }
 }
