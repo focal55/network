@@ -20,7 +20,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new UserBundle\UserBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle()
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

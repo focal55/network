@@ -18,6 +18,11 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        public:
+            methods: [POST]
+            pattern: ^/api/tokens
+            security: false
+
         main:
             anonymous: ~
             guard:

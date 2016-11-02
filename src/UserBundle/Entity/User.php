@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  * @ORM\Table(name="users")
  * @UniqueEntity(fields={"email"}, message="It looks like you already have an account!")
@@ -80,6 +81,15 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $recoverExpires;
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function onPrePersistSetRegistrationDate()
+    {
+        $this->created = new \DateTime();
+        $this->updated = new \DateTime();
+    }
 
     public function getId() {
         return $this->id;
