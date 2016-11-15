@@ -21,7 +21,7 @@ class UserAdminForm extends AbstractType
             ],
             'multiple' => true
         ]);
-        $builder->add('password');
+        $builder->add('plainPassword');
     }
 
     public function configureOptions(OptionsResolver $resolver)
