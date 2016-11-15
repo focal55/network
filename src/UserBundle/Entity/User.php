@@ -182,7 +182,7 @@ class User implements UserInterface
         $this->plainPassword = $plainPassword;
         // guarantees that the entity looks "dirty" to Doctrine
         // when changing the plainPassword
-        $this->password = null;
+        //$this->password = null;
     }
 
     public function getRecoverToken()

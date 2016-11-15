@@ -20,6 +20,7 @@ class HashPasswordListener implements EventSubscriber {
         $this->passwordEncoder = $passwordEncoder;
     }
 
+    // Before Entity is saved.
     public function prePersist(LifecycleEventArgs $args) {
         $entity = $args->getEntity();
         if (!$entity instanceof User) {
@@ -42,6 +43,8 @@ class HashPasswordListener implements EventSubscriber {
     }
 
     public function getSubscribedEvents() {
+        // prePersist = Event listener before entity is saved.
+        // preUpdate = Event listener after entity is saved.
         return ['prePersist', 'preUpdate'];
     }
 
