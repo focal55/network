@@ -1,6 +1,6 @@
 <?php
 
-namespace UserBundle\Controller\Admin;
+namespace UserBundle\Controller\Web\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

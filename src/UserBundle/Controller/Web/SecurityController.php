@@ -1,6 +1,6 @@
 <?php
 
-namespace UserBundle\Controller;
+namespace UserBundle\Controller\Web;
 
 
 use UserBundle\Form\LoginFormType;

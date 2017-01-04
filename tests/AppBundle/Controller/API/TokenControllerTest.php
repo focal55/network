@@ -13,30 +13,27 @@ use AppBundle\Tests\ApiTestCase;
 
 class TokenControllerTest extends ApiTestCase
 {
-    public function testRequiresAuthentication()
-    {
-        $response = $this->client->post('/api/programmers', [
-          'body' => '[]'
-        ]);
-        $this->assertEquals(401, $response->getStatusCode());
-    }
-
     public function testPOSTCreateToken()
     {
-        $this->createUser('weaverryan', 'I<3Pizza');
+        $this->createUser('weaverryan', 'test');
 
-        // Post user/pass with Guzzle.
         $response = $this->client->post('/api/tokens', [
-          'auth' => ['weaverryan@foo.com', 'I<3Pizza']
+            'auth' => ['weaverryan@foo.com', 'test']
         ]);
-
-        // Asset we get a successful response.
         $this->assertEquals(200, $response->getStatusCode());
-
-        // Asset the response contains a 'token' property.
         $this->asserter()->assertResponsePropertyExists(
-          $response,
-          'token'
+            $response,
+            'token'
         );
+    }
+
+    public function testPOSTInvalidCredentials()
+    {
+        $this->createUser('weaverryan', 'testasdsad');
+
+        $response = $this->client->post('/api/tokens', [
+            'auth' => ['weaverryan', 'test']
+        ]);
+        $this->assertEquals(401, $response->getStatusCode());
     }
 }

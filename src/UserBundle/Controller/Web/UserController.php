@@ -1,6 +1,6 @@
 <?php
 
-namespace UserBundle\Controller;
+namespace UserBundle\Controller\Web;
 
 use Faker\Provider\cs_CZ\DateTime;
 use Symfony\Component\Form\FormError;
