@@ -11,10 +11,10 @@ namespace AppBundle\Controller\Web;
 
 use AppBundle\Entity\Post;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Response;
 
-class PostController extends Controller  {
+class PostController extends BaseController  {
 
   /**
    * @Route("/posts/new")

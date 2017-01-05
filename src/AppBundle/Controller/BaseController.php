@@ -2,17 +2,14 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Repository\ProgrammerRepository;
-use AppBundle\Repository\UserRepository;
-use AppBundle\Repository\ProjectRepository;
-use AppBundle\Repository\BattleRepository;
-use AppBundle\Repository\ApiTokenRepository;
+use UserBundle\Entity\User;
+use AppBundle\Repository\Post;
+use UserBundle\Repository\UserRepository;
 use JMS\Serializer\SerializationContext;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Entity\User;
 
 abstract class BaseController extends Controller
 {
@@ -51,12 +48,12 @@ abstract class BaseController extends Controller
     /**
      * Used to find the fixtures user - I use it to cheat in the beginning
      *
-     * @param $username
+     * @param $email
      * @return User
      */
-    public function findUserByUsername($username)
+    public function findUserByEmail($email)
     {
-        return $this->getUserRepository()->findUserByUsername($username);
+        return $this->getUserRepository()->findOneByEmail($email);
     }
 
     /**
@@ -65,51 +62,16 @@ abstract class BaseController extends Controller
     protected function getUserRepository()
     {
         return $this->getDoctrine()
-            ->getRepository('AppBundle:User');
+            ->getRepository('UserBundle:User');
     }
 
     /**
-     * @return ProgrammerRepository
+     * @return PostRepository
      */
-    protected function getProgrammerRepository()
+    protected function getPostRepository()
     {
         return $this->getDoctrine()
-            ->getRepository('AppBundle:Programmer');
-    }
-
-    /**
-     * @return ProjectRepository
-     */
-    protected function getProjectRepository()
-    {
-        return $this->getDoctrine()
-            ->getRepository('AppBundle:Project');
-    }
-
-    /**
-     * @return BattleRepository
-     */
-    protected function getBattleRepository()
-    {
-        return $this->getDoctrine()
-            ->getRepository('AppBundle:Battle');
-    }
-
-    /**
-     * @return \AppBundle\Battle\BattleManager
-     */
-    protected function getBattleManager()
-    {
-        return $this->container->get('battle.battle_manager');
-    }
-
-    /**
-     * @return ApiTokenRepository
-     */
-    protected function getApiTokenRepository()
-    {
-        return $this->getDoctrine()
-            ->getRepository('AppBundle:ApiToken');
+            ->getRepository('AppBundle:Post');
     }
 
     protected function createApiResponse($data, $statusCode = 200)

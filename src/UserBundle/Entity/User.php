@@ -89,6 +89,7 @@ class User implements UserInterface
     {
         $this->created = new \DateTime();
         $this->updated = new \DateTime();
+        $this->roles[] = User::ROLE_DEFAULT;
     }
 
     public function getId() {

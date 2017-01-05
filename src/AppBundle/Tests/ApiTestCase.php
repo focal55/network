@@ -2,6 +2,7 @@
 
 namespace AppBundle\Tests;
 
+use AppBundle\Entity\Post;
 use UserBundle\Entity\User;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManager;
@@ -279,6 +280,21 @@ class ApiTestCase extends KernelTestCase
         return $user;
     }
 
+    protected function createPost($title, $body)
+    {
+        $post = new Post();
+        $post->setUid(1);
+        $post->setTitle($title);
+        $post->setBody($body);
+        $post->setCreated(time());
+        $post->setUpdated(time());
+        $em = $this->getEntityManager();
+        $em->persist($post);
+        $em->flush();
+
+        return $post;
+    }
+
     protected function getAuthorizedHeaders($username, $headers = array())
     {
         $token = $this->getService('lexik_jwt_authentication.encoder')
@@ -287,27 +303,6 @@ class ApiTestCase extends KernelTestCase
         $headers['Authorization'] = 'Bearer '.$token;
 
         return $headers;
-    }
-
-    protected function createProgrammer(array $data)
-    {
-        $data = array_merge(array(
-            'powerLevel' => rand(0, 10),
-            'user' => $this->getEntityManager()
-                ->getRepository('AppBundle:User')
-                ->findAny()
-        ), $data);
-
-        $accessor = PropertyAccess::createPropertyAccessor();
-        $programmer = new Programmer();
-        foreach ($data as $key => $value) {
-            $accessor->setValue($programmer, $key, $value);
-        }
-
-        $this->getEntityManager()->persist($programmer);
-        $this->getEntityManager()->flush();
-
-        return $programmer;
     }
 
     /**

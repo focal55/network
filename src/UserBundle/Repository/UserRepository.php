@@ -10,7 +10,6 @@ class UserRepository extends EntityRepository
     /**
      * @return User
      */
-    /*
     public function findOneByEmail($email)
     {
         return $this->createQueryBuilder('users')
@@ -19,5 +18,4 @@ class UserRepository extends EntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-    */
 }
