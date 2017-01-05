@@ -271,7 +271,7 @@ class ApiTestCase extends KernelTestCase
     {
         $user = new User();
         $user->setEmail($username.'@foo.com');
-        $user->setPassword($plainPassword);
+        $user->setPlainPassword($plainPassword);
         $em = $this->getEntityManager();
         $em->persist($user);
         $em->flush();
