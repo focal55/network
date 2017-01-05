@@ -18,10 +18,15 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        public:
-            methods: [POST]
-            pattern: ^/api/tokens
-            security: false
+        api:
+            pattern: ^/api/
+            anonymous: true
+            # do not save the user in the session,
+            # require a token each time.
+            stateless: true
+            guard:
+                authenticator:
+                  - jwt_token_authenticator
 
         main:
             anonymous: ~
