@@ -1,0 +1,50 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ybarra
+ * Date: 10/13/16
+ * Time: 1:20 PM
+ */
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ */
+class Post {
+  /**
+   * @ORM\Id
+   * @ORM\GeneratedValue(strategy="AUTO")
+   * @ORM\Column(type="integer")
+   */
+  private $id;
+
+  /**
+   * @ORM\Column(type="integer")
+   */
+  private $uid;
+
+  /**
+   * @ORM\Column(type="string")
+   */
+  private $title;
+
+  /**
+   * @ORM\Column(type="string")
+   */
+  private $body;
+
+
+  /**
+   * @ORM\Column(type="integer")
+   */
+  private $created;
+
+  /**
+   * @ORM\Column(type="integer")
+   */
+  private $updated;
+}
