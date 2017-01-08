@@ -13,6 +13,10 @@ use AppBundle\Tests\ApiTestCase;
 
 class TokenControllerTest extends ApiTestCase
 {
+
+
+    // @TODO: CONVERT TO SENDING JSON
+
     public function testPOSTCreateToken()
     {
         $this->createUser('weaverryan', 'test');

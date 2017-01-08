@@ -28,21 +28,29 @@ class TokenController extends BaseController
 
         $create_new_user = FALSE;
 
+        $data = \GuzzleHttp\json_decode($request->getContent());
+
+        if (!$data) {
+            $apiProblem = new ApiProblem(400, ApiProblem::TYPE_VALIDATION_ERROR);
+            $apiProblem->set('details', 'Invalid JSON String Passed to API');
+            return $this->get('api.response_factory')->createResponse($apiProblem);
+        }
+
         // Check if the user's email is in the database.
         $user = $this->getDoctrine()
             ->getRepository('UserBundle:User')
-            ->findOneBy(['email' => $request->get('email')]);
+            ->findOneBy(['email' => $data->email]);
 
         // If $op is fb, attempt to use the access token to access their profile.
         if ($op == 'fb') {
-            if ($request->get('fb_token')) {
+            if ($data->fb_token) {
                 $fb = new Facebook([
                     'app_id' => $this->container->getParameter('fb_app_id'),
                     'app_secret' => $this->container->getParameter('fb_secret'),
                 ]);
 
                 try {
-                    $response = $fb->get('/me?fields=email,name', $request->get('fb_token'));
+                    $response = $fb->get('/me?fields=email,name', $data->fb_token);
                     // FB User Found, if no user in db, create it.
                     if (!$user) {
                         $fb_user = $response->getGraphUser();
