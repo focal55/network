@@ -13,8 +13,8 @@ user_web:
     resource: "@UserBundle/Controller/Web"
     type:     annotation
 
-user_api:
-    resource: "@UserBundle/Controller/API"
-    type:     annotation
-    defaults:
-        _format: json
+#user_api:
+#    resource: "@UserBundle/Controller/API"
+#    type:     annotation
+#    defaults:
+#        _format: json

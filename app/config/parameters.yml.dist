@@ -20,3 +20,7 @@ parameters:
 
     # Password for JWT public/private keys
     jwt_key_pass_phrase: ~
+
+    #FB App
+    fb_app_id: ~
+    fb_secret: ~
