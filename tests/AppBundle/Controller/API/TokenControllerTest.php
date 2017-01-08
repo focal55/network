@@ -14,15 +14,12 @@ use AppBundle\Tests\ApiTestCase;
 class TokenControllerTest extends ApiTestCase
 {
 
-
-    // @TODO: CONVERT TO SENDING JSON
-
-    public function testPOSTCreateToken()
+    public function testPUTCreateToken()
     {
         $this->createUser('weaverryan', 'test');
 
         $response = $this->client->post('/api/tokens', [
-            'form_params' => [
+            'json' => [
                 'email' => 'weaverryan@foo.com',
                 'password' => 'test'
             ]
@@ -39,7 +36,7 @@ class TokenControllerTest extends ApiTestCase
         $this->createUser('weaverryan', 'testasdsad');
 
         $response = $this->client->post('/api/tokens', [
-          'form_params' => [
+          'json' => [
             'email' => 'weaverryan@foo.com',
             'password' => 'test'
           ]
@@ -52,9 +49,9 @@ class TokenControllerTest extends ApiTestCase
         $this->createUser('joe', 'test');
 
         $response = $this->client->post('/api/tokens/fb', [
-          'form_params' => [
+          'json' => [
             'email' => 'joe@foo.com',
-            'fb_token' => 'EAACYSNVMJkcBAJRfED83K5ENpNDDYBscggP2nPxnLXIaK0hi101wh1TghAv9EsPUjQUF7364B9HSgDGZB9xWdyKXPHB4TVa2dMmoDZCydEZCuu1QZAPCrYmrPk2iLvPN6ZC4SZA6NPFStiU4eMDf3ow4IIJflO1z8tdXznxeENYQZDZD'
+            'fb_token' => 'EAACYSNVMJkcBAMtNFrfQc7ukM4N3oDQJRby2cRWx0ZBk3rgbIQb2l6egvzY0EIy6ZBTUPyFpU1yt9m2P6OlxQbfknrhZBGf9KKmTDAWThOQEkV2XjoaRKTTaek21CYQsVFAi7oJf7GzeLzVx4bbxzXZC7JgmhWuggbPCH6Xv5AZDZD'
           ]
         ]);
 
@@ -68,9 +65,9 @@ class TokenControllerTest extends ApiTestCase
     public function testPOSTCreateTokenWithFBAuthOnNonExistingUser()
     {
         $response = $this->client->post('/api/tokens/fb', [
-          'form_params' => [
+          'json' => [
             'email' => 'nouser@foo.com',
-            'fb_token' => 'EAACYSNVMJkcBAJRfED83K5ENpNDDYBscggP2nPxnLXIaK0hi101wh1TghAv9EsPUjQUF7364B9HSgDGZB9xWdyKXPHB4TVa2dMmoDZCydEZCuu1QZAPCrYmrPk2iLvPN6ZC4SZA6NPFStiU4eMDf3ow4IIJflO1z8tdXznxeENYQZDZD'
+            'fb_token' => 'EAACYSNVMJkcBAMtNFrfQc7ukM4N3oDQJRby2cRWx0ZBk3rgbIQb2l6egvzY0EIy6ZBTUPyFpU1yt9m2P6OlxQbfknrhZBGf9KKmTDAWThOQEkV2XjoaRKTTaek21CYQsVFAi7oJf7GzeLzVx4bbxzXZC7JgmhWuggbPCH6Xv5AZDZD'
           ]
         ]);
 

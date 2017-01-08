@@ -83,7 +83,7 @@ class TokenController extends BaseController
         // If $op is credentials, check password.
         elseif ($op == 'credentials' && $user) {
             $isValid = $this->get('security.password_encoder')
-                ->isPasswordValid($user, $request->get('password'));
+                ->isPasswordValid($user, $data->password);
             if (!$isValid) {
                 throw new BadCredentialsException();
             }
