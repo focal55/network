@@ -1,0 +1,27 @@
+{
+  "name": "network_theme",
+  "version": "1.0.0",
+  "description": "Web layer for the network platform",
+  "main": "index.js",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-base64": "^0.1.3",
+    "gulp-changed": "^1.3.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-ignore": "^2.0.2",
+    "gulp-imagemin": "^3.0.3",
+    "gulp-livereload": "^3.8.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-standard": "^7.0.1",
+    "gulp-strip-debug": "^1.1.0",
+    "gulp-uglify": "^2.0.0"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6"
+  }
+}
